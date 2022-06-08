@@ -4,42 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/index.css">
+    <link rel="stylesheet" href="../public/styles.css">
+
     <title>Document</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .edit_box{
-            margin: auto;
-            height: 500px;
-            width : 500px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-
-        }
-        form{
-            margin-top: auto;
-        }
-
-         input{
-             width: 80%;
-             margin : 10px;
-            padding: 12px;
-            border-radius: 10px;
-            border-color: rgba(10, 10, 10, 0.334);
-        }
-          .submit-btn{
-            width:120px;
-            height:30px;
-        }
-    </style>
+    
 </head>
 <body>
 
-    <nav>
+     <nav class = "container">
         <a href="http://localhost:8000/"> Home </a>
     </nav>
     
@@ -48,7 +21,7 @@
             <input type="text" name="" id="item" value ="{{item}}">
             <input type="number" name="" id="quantity" value ="{{quantity}}">
             <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
-          <button type="submit" class ="submit-btn"> Update Product </button>
+            <button type="submit" class ="submit-btn"> Update Product </button>
             <div class="result"></div>
 
         </form>
@@ -59,7 +32,6 @@
         crossorigin="anonymous"></script>
     <script>
         const result = document.querySelector(".result");
-
         const btn = document.querySelector(".submit-btn");
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")

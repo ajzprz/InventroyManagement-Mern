@@ -4,13 +4,15 @@ const connectDatabase = require('./database/database');
 const productRoutes = require('./routes/products')
 const Product = require('./models/Products');
 
-
 connectDatabase ()
 
 const app = express();
+app.use(('/public'), express.static('./public'))
+app.use((''), express.static('./public'))
+
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
-app.use('/products/',productRoutes)
+app.use('/products',productRoutes)
 app.set('view engine','hbs');
 app.set('views','./views')
 

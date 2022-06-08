@@ -1,15 +1,19 @@
 const express = require('express');
-const { getProducts, updateProduct, deleteProduct, createProduct, getSingleProduct } = require('../controllers/products');
+const { getProducts, updateProduct, deleteProduct, createProduct, getSingleProduct, getProductRemove } = require('../controllers/products');
+const Product = require('../models/Products');
 
 
 const router = new express.Router();
 
 router.get('/', getProducts)
-    // code for update
-
-
+ 
 router.get('/createProduct',  (req,res)=>{
     res.render('newProduct')
+})
+router.get('/:productId', async (req,res)=>{
+    const { productId } = req.params;
+    const products = await Product.findById(productId);
+    res.render('deleteProduct', products)
 })
 
 router.post('/', createProduct )
@@ -18,6 +22,6 @@ router.get('/:productId', getSingleProduct )
 
 router.patch('/:productId', updateProduct)
 
-router.delete('/delete/:productId', deleteProduct)
+router.delete('/:productId', deleteProduct)
 
 module.exports = router;
