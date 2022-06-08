@@ -45,12 +45,14 @@
 </div>
     <div class="result"></div>
     
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous"></script>
     <script>
         const result = document.querySelector(".result");
         const btn = document.querySelector(".submit-btn");
+        const id = document.querySelector("#id");
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")
         const unitCost = document.querySelector("#unit_cost")
@@ -63,12 +65,7 @@
             const unitCostValue = unitCost.value;
             const totalCostValue = totalCost.value;
             try {
-                const response = await axios.delete('/products/remove/{:productId}',{
-                    item: itemValue,
-                    quantity: quantityValue,
-                    unit_cost: unitCostValue,
-                    total_cost: totalCostValue,
-                })
+                const response = await axios.delete(`/{{_id}}`)
                 console.log(response);
                 if
                     (response.status === 200) {
@@ -79,7 +76,7 @@
                 result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
             }
         })
-    </script> -->
+    </script>
 </body>
 
 </html>

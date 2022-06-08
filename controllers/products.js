@@ -14,8 +14,8 @@ const createProduct = async (req, res) => {
     unit_cost: req.body.unit_cost,
     total_cost: req.body.total_cost,
   });
-  // res.render('index', newProduct);
-  res.json(newProduct);
+  res.render('index', newProduct);
+  // res.json(newProduct);
 };
 
 const getSingleProduct = async (req, res) => {
@@ -23,12 +23,6 @@ const getSingleProduct = async (req, res) => {
   const products = await Product.findById(productId);
   res.render('deleteProduct', products)
 };
-
-// const getProductRemove = async (req, res) => {
-//   const { productId } = req.params;
-//   const products = await Product.findById(productId);
-//   res.render('editProduct', products)
-// };
 
 const updateProduct = async (req, res) => {
   console.log(req.body);
@@ -54,11 +48,8 @@ const deleteProduct = async (req, res) => {
     unit_cost: req.body.unit_cost,
     total_cost: req.body.total_cost,
   });
-  // res.json(result)
-  // res.render('index', result)
-  console.log(req.body);
-
-  res.send("Deleted");
+  res.render('index', result)
+ 
 };
 
 module.exports = {

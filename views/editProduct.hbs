@@ -18,6 +18,7 @@
     
     <div class="edit_box">
         <form>
+            <input type="text" name="" id="id" value = "{{_id}}">
             <input type="text" name="" id="item" value ="{{item}}">
             <input type="number" name="" id="quantity" value ="{{quantity}}">
             <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
@@ -33,6 +34,7 @@
     <script>
         const result = document.querySelector(".result");
         const btn = document.querySelector(".submit-btn");
+        const id = document.querySelector("#id");
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")
         const unitCost = document.querySelector("#unit_cost")
@@ -44,7 +46,7 @@
         const unitCostValue = unitCost.value;
 
         try {
-          const response = await axios.patch('/products/{:productId}', {
+          const response = await axios.patch('/products/{{id}}', {
             item: itemValue,
             quantity: quantityValue,
             unit_cost: unitCostValue,
