@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        nav{
+            text-align: center;
+        }
+
+        .edit_box {
+            margin: auto;
+            height: 500px;
+            width: 500px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        form {
+            margin-top: auto;
+        }
+
+        input {
+            width: 80%;
+            margin: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            border-color: rgba(10, 10, 10, 0.334);
+        }
+        .submit-btn{
+            width:120px;
+            height:30px;
+        }
+    </style>
+</head>
+
+<body>
+     <nav>
+        <a href="http://localhost:8000/"> Home </a>
+    </nav>
+    <div class="edit_box">
+        <form onsubmit="/">
+            <input type="text" name=""  id="item" placeholder="Item..">
+            <input type="number" name="" id="quantity" placeholder="Quantity..">
+            <input type="number" name="" id="unit_cost" placeholder="UnitPrice..">
+          <a href="http://localhost:8000"></a>  <button type="submit" class ="submit-btn"> Submit </button></a>
+            <div class="result"></div>
+        </form>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous"></script>
+    <script>
+        const result = document.querySelector(".result");
+
+        const btn = document.querySelector(".submit-btn");
+        const item = document.querySelector("#item")
+        const quantity = document.querySelector("#quantity")
+        const unitCost = document.querySelector("#unit_cost")
+        
+        btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const itemValue = item.value;
+        const quantityValue = quantity.value;
+        const unitCostValue = unitCost.value;
+
+        try {
+          const response = await axios.post("/products", {
+            item: itemValue,
+            quantity: quantityValue,
+            unit_cost: unitCostValue,
+            total_cost: quantityValue * unitCostValue,
+          });
+          console.log(response);
+          if (response.status === 200) {
+            result.innerHTML = `<div class="alert alert-success">Product added successfully</div>`;
+          }
+        } catch (error) {
+          console.log(error.response)
+          result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
+        }
+      });
+
+
+    </script>
+</body>
+
+</html>

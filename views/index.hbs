@@ -1,0 +1,89 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width:
+                100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding:
+                8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="http://localhost:8000/"> Home </a>
+    </nav>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Total Cost</th>
+            <th>Buttons</th>
+        </tr>
+        {{#each products}}
+            <tr>
+                <td>{{item}}</td>
+                <td>{{quantity}}</td>
+                <td>${{unit_cost}}</td>
+                <td>${{total_cost}}</td>
+                <td><a href="products/{{id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                    <a href="products/{{id}}"><i class="fa fa-remove" style="font-size:24px"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+        <tr>
+            <td>
+                <a href="products/createProduct">Add New Product</a>
+            </td>
+        </tr>
+    </table>
+    <div class="result"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous"></script>
+    <script>
+        const result = document.querySelector(".result");
+        const btn = document.querySelector(".fa-remove");
+
+        btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+                const response = await axios.delete('products/{:productId}', {
+                    item: itemValue,
+                    quantity: quantityValue,
+                    unit_cost: unitCostValue,
+                })
+                console.log(response);
+                if
+                    (response.status === 200) {
+                    result.innerHTML = `<div class="alert alert-success">Product deleted successfully</div>`;
+                }
+            } catch (error) {
+                console.log(error.response)
+                result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
+            }
+        })
+    </script>
+</body>
+
+</html>
