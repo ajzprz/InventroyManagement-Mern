@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../public/index.css">
+    <link rel="stylesheet" href="../public/styles.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>Document</title>
     
@@ -31,8 +33,8 @@
                 <td id = "unit_cost">${{unit_cost}}</td>
                 <td id = "total_cost">${{total_cost}}</td>
                 <td class = " buttons">
-                    <a href="products/{{id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
-                    <a href ="products/{{id}}"><i class="fa fa-remove"  style="font-size:24px"></i></button>
+                    <button  class ="edit-btn"><i class="fa fa-edit" style="font-size:24px"></i></button>
+                    <button  class ="delete-btn"><i class="fa fa-remove"  style="font-size:24px"></i></button>
                 </td>
             </tr>
         {{/each}}
@@ -42,22 +44,45 @@
             </td>
         </tr>
     </table>
-</div>
+    
+    <div class="modal" id = "mymodal">
+        <div class="edit_box">
+            <form>
+                <input type="text" name="" id="id" value = "{{_id}}">
+                <input type="text" name="" id="item" value ="{{item}}">
+                <input type="number" name="" id="quantity" value ="{{quantity}}">
+                <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
+                <button type="submit" class ="submit-btn"> Update Product </button>
+                <div class="result"></div>
+            </form>
+        </div>
+    </div>
+    
     <div class="result"></div>
+    </div>
     
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous"></script>
     <script>
+        var modal = document.querySelector("#myModal");
+        // var modalbtn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
         const result = document.querySelector(".result");
-        const btn = document.querySelector(".submit-btn");
+        const editbtn = document.querySelector(".edit-btn");
+        const deletebtn = document.querySelector(".delete-btn");
+       
+        editbtn.onclick = function() {
+            modal.style.display = "flex";
+        }
         const id = document.querySelector("#id");
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")
         const unitCost = document.querySelector("#unit_cost")
         const totalCost = document.querySelector("#total_cost")
-        
+
         btn.addEventListener("click", async (e) => {
             e.preventDefault();
             const itemValue = item.value;
@@ -75,7 +100,29 @@
                 console.log(error.response)
                 result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
             }
-        })
+        }) 
+
+        btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const itemValue = item.value;
+        const quantityValue = quantity.value;
+        const unitCostValue = unitCost.value;
+
+        try {
+          const response = await axios.patch('/products/{{id}}', {
+            item: itemValue,
+            quantity: quantityValue,
+            unit_cost: unitCostValue,
+          });
+          console.log(response);
+          if (response.status === 200) {
+            result.innerHTML = `<div class="alert alert-success">Product Updated successfully</div>`;
+          }
+        } catch (error) {
+          console.log(error.response)
+          result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
+        }
+      });
     </script>
 </body>
 
