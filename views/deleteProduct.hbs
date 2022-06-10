@@ -39,8 +39,7 @@
         const totalCost = document.querySelector("#total_cost")
         
         btn.addEventListener("click", async (e) => {
-            e.preventDefault();
-           
+            e.preventDefault();    
             try {
                 const response = await axios.delete(`/products/{{_id}}`)
                 console.log(response);

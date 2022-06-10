@@ -16,7 +16,7 @@ router.post('/', validate, createProduct )
 
 router.get('/edit/:productId', getSingleProduct )
 
-router.patch('/:productId', updateProduct)
+router.patch('/edit/:productId', updateProduct)
 
 router.get('/:productId', getDeleteProduct )
 router.delete('/:productId', deleteProduct)
