@@ -3,29 +3,34 @@
     padding: 0;
     box-sizing: border-box;
 }
-.edit_box{
+.edit_box form{
     margin: auto;
-    height: 500px;
     width : 500px;
     text-align: center;
     display: flex;
     flex-direction: column;
+    border-radius:10px;
+    background:steelblue;
 
 }
-form{
-    margin-top: auto;
-}
 
- input{
-     width: 80%;
-     margin : 10px;
-    padding: 12px;
+input {
+    /* width: 80%; */
+    margin: 8px;
+    margin-inline: 80px;
+    padding: 15px;
     border-radius: 10px;
     border-color: rgba(10, 10, 10, 0.334);
 }
-  .submit-btn{
+
+
+  .btn{
     border-radius: 10px;
-    padding:17px;
+    margin: 8px;
+    margin-inline: 80px;
+    padding:20px;
+    border: 1px solid black;
+    background:rgba(0, 0, 0, 0.308);
 
 }
 
@@ -33,9 +38,10 @@ input:hover{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.submit-btn:hover{
+.btn:hover{
     cursor: pointer;
     background-color: rgb(22, 23, 23);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     color: white;
+
 }

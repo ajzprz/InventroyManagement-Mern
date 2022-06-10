@@ -28,11 +28,12 @@
         </tr>
         {{#each products}}
             <tr>
+                <td id = "id" class="hidden">{{_id}}</td>
                 <td id = "item">{{item}}</td>
                 <td id = "quantity">{{quantity}}</td>
                 <td id = "unit_cost">${{unit_cost}}</td>
                 <td id = "total_cost">${{total_cost}}</td>
-                <td class = " buttons">
+                <td class = "buttons">
                     <button  class ="edit-btn"><i class="fa fa-edit" style="font-size:24px"></i></button>
                     <button  class ="delete-btn"><i class="fa fa-remove"  style="font-size:24px"></i></button>
                 </td>
@@ -44,19 +45,32 @@
             </td>
         </tr>
     </table>
-    
-    <div class="modal" id = "mymodal">
+    <div class="modal">
         <div class="edit_box">
             <form>
-                <input type="text" name="" id="id" value = "{{_id}}">
-                <input type="text" name="" id="item" value ="{{item}}">
-                <input type="number" name="" id="quantity" value ="{{quantity}}">
-                <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
-                <button type="submit" class ="submit-btn"> Update Product </button>
-                <div class="result"></div>
+                <span class="close-edit">&times;</span>
+                <input type="number" id="id" value = "{{this._id}}" readonly>
+                <input type="text" id="item" value ="{{item}}">
+                <input type="number" id="quantity" value ="{{quantity}}">
+                <input type="number" id="unit_cost" value ="{{unit_cost}}">
+                <button type="submit" "btn submit-btn"> Update Product </button>
             </form>
         </div>
     </div>
+
+    <div class="deleteModal">
+        <div class="edit_box">
+            <form>
+                <span class="close-delete">&times;</span>
+                <br>
+                <p>Are you sure to delete {{item}}</p>
+
+                <button type="submit" class ="btn yes-btn"> Yes </button>
+                <button type="submit" class ="btn no-btn"> No </button>
+            </form>
+        </div>
+    </div>
+
     
     <div class="result"></div>
     </div>
@@ -66,43 +80,42 @@
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous"></script>
     <script>
-        var modal = document.querySelector("#myModal");
-        // var modalbtn = document.getElementById("myBtn");
-        var span = document.getElementsByClassName("close")[0];
+        var editClose = document.querySelector(".close-edit");
+        var deleteClose = document.querySelector(".close-delete");
 
         const result = document.querySelector(".result");
         const editbtn = document.querySelector(".edit-btn");
         const deletebtn = document.querySelector(".delete-btn");
+
+        var modal = document.querySelector(".modal");
+        var deleteModal = document.querySelector(".deleteModal");
        
         editbtn.onclick = function() {
-            modal.style.display = "flex";
+            modal.style.display = "block";
         }
+
+        deletebtn.onclick = function() {
+            deleteModal.style.display = "block";
+        }
+       
+
+        editClose.onclick = function() {
+         modal.style.display = "none";
+        }   
+        
+        
+        deleteClose.onclick = function() {
+         deleteModal.style.display = "none";
+        }     
+
+        const updateBtn = document.querySelector(".submit-btn");
         const id = document.querySelector("#id");
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")
         const unitCost = document.querySelector("#unit_cost")
         const totalCost = document.querySelector("#total_cost")
 
-        btn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const itemValue = item.value;
-            const quantityValue = quantity.value;
-            const unitCostValue = unitCost.value;
-            const totalCostValue = totalCost.value;
-            try {
-                const response = await axios.delete(`/{{_id}}`)
-                console.log(response);
-                if
-                    (response.status === 200) {
-                    result.innerHTML = `<div class="alert alert-success">Product deleted successfully</div>`;
-                }
-            } catch (error) {
-                console.log(error.response)
-                result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
-            }
-        }) 
-
-        btn.addEventListener("click", async (e) => {
+        updateBtn.addEventListener("click", async (e) => {
         e.preventDefault();
         const itemValue = item.value;
         const quantityValue = quantity.value;
@@ -123,6 +136,28 @@
           result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
         }
       });
+
+        const yesBtn = document.querySelector(".yes-btn")
+        const noBtn = document.querySelector(".no-btn")
+        yesBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const itemValue = item.value;
+            const quantityValue = quantity.value;
+            const unitCostValue = unitCost.value;
+            const totalCostValue = totalCost.value;
+            try {
+                const response = await axios.delete(`/{{_id}}`)
+                console.log(response);
+                if
+                    (response.status === 200) {
+                    result.innerHTML = `<div class="alert alert-success">Product deleted successfully</div>`;
+                }
+            } catch (error) {
+                console.log(error.response)
+                result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
+            }
+        }) 
+
     </script>
 </body>
 

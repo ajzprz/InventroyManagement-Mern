@@ -1,5 +1,6 @@
 const express = require('express');
 const { getProducts, updateProduct, deleteProduct, createProduct, getSingleProduct, getProductRemove } = require('../controllers/products');
+const validate = require('../middleware/validation');
 const Product = require('../models/Products');
 
 
@@ -16,7 +17,7 @@ router.get('/:productId', async (req,res)=>{
     res.render('deleteProduct', products)
 })
 
-router.post('/', createProduct )
+router.post('/', validate, createProduct )
 
 router.get('/:productId', getSingleProduct )
 

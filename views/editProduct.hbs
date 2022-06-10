@@ -18,15 +18,14 @@
     
     <div class="edit_box">
         <form>
-            <input type="text" name="" id="id" value = "{{_id}}">
+            <input type="text" name="" id = "id" value = "{{_id}}">
             <input type="text" name="" id="item" value ="{{item}}">
             <input type="number" name="" id="quantity" value ="{{quantity}}">
             <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
             <button type="submit" class ="submit-btn"> Update Product </button>
             <div class="result"></div>
 
-        </form>
-      
+        </form>      
     </div>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
@@ -38,6 +37,7 @@
         const item = document.querySelector("#item")
         const quantity = document.querySelector("#quantity")
         const unitCost = document.querySelector("#unit_cost")
+
         
         btn.addEventListener("click", async (e) => {
         e.preventDefault();
