@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/index.css">
-    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/styles.css">
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
     
     <div class="edit_box">
         <form>
-            <input type="text" name="" id="id" value = "{{_id}}">
+            <input type="text" name="" id="id" value = "{{_id}}" readonly>
             <input type="text" name="" id="item" value ="{{item}}" readonly>
             <input type="number" name="" id="quantity" value ="{{quantity}}" readonly>
             <input type="number" name="" id="unit_cost" value ="{{unit_cost}}" readonly>
@@ -40,10 +40,7 @@
         
         btn.addEventListener("click", async (e) => {
             e.preventDefault();
-            const itemValue = item.value;
-            const quantityValue = quantity.value;
-            const unitCostValue = unitCost.value;
-            const totalCostValue = totalCost.value;
+           
             try {
                 const response = await axios.delete(`/products/{{_id}}`)
                 console.log(response);

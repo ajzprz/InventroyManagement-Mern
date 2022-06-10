@@ -7,8 +7,8 @@ const Product = require('./models/Products');
 connectDatabase ()
 
 const app = express();
-app.use(('/public'), express.static('./public'))
-app.use((''), express.static('./public'))
+app.use(express.static('./public'))
+
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())

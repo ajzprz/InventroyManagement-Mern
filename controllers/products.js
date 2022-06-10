@@ -21,8 +21,9 @@ const createProduct = async (req, res) => {
 const getSingleProduct = async (req, res) => {
   const { productId } = req.params;
   const products = await Product.findById(productId);
-  res.render('deleteProduct', products)
+  res.render('editProduct', products)
 };
+
 
 const updateProduct = async (req, res) => {
   console.log(req.body);
@@ -36,6 +37,12 @@ const updateProduct = async (req, res) => {
   });
   //   res.json(updatedProduct)
   res.render("index", updatedProduct);
+};
+
+const getDeleteProduct = async (req, res) => {
+  const { productId } = req.params;
+  const products = await Product.findById(productId);
+  res.render('deleteProduct', products)
 };
 
 
@@ -56,6 +63,7 @@ module.exports = {
   getProducts,
   createProduct,
   getSingleProduct,
+  getDeleteProduct,
   updateProduct,
   deleteProduct,
 };

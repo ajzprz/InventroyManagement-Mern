@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../public/index.css">
+    <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>Document</title>
     
@@ -31,7 +31,7 @@
                 <td id = "unit_cost">${{unit_cost}}</td>
                 <td id = "total_cost">${{total_cost}}</td>
                 <td class = " buttons">
-                    <a href="products/{{id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                    <a href="products/edit/{{id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
                     <a href ="products/{{id}}"><i class="fa fa-remove"  style="font-size:24px"></i></button>
                 </td>
             </tr>
@@ -46,7 +46,7 @@
     <div class="result"></div>
     
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous"></script>
     <script>
@@ -76,7 +76,7 @@
                 result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
             }
         })
-    </script>
+    </script> -->
 </body>
 
 </html>
