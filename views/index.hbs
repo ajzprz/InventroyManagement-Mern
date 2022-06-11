@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,20 +27,24 @@
           <th>Quantity</th>
           <th>Unit Cost</th>
           <th>Total Cost</th>
-          <th>Buttons</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
         {{#each products}}
           <tr>
-            <td id="idValue" data-id = "{{id}}">{{item}}</td>
+            <td id="itemValue">{{item}}</td>
             <td id="quantity">{{quantity}}</td>
             <td id="unit_cost">${{unit_cost}}</td>
             <td id="total_cost">${{total_cost}}</td>
-            <td class="buttons">
-              <a href="products/edit/{{id}}"><i
+              <td><a href="products/edit/{{id}}">
+              <i
                   class="fa fa-edit"
                   style="font-size:24px"
                 ></i></a>
-              <a class="delete-btn" >
+            </td>
+            <td>
+                <a id-value = "{{_id}}" 
+                id="delete-btn">
                 <i class="fa fa-remove" 
                 style="font-size:24px"></i></a>
             </td>
@@ -54,27 +58,32 @@
       </table>
     </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous"></script>
     <script>
     const id = document.querySelector("#idValue")
     const item= document.querySelector("#itemValue")
-    const deleteBtn = document.querySelector(".delete-btn");
+    const deleteBtn = document.querySelector("#delete-btn");
      // async function deleteProduct(e) { 
-    deleteBtn.addEventListener("click", async (e) => {
-          e.preventDefault();
-        const idValue = id.getAttribute('data-id'); 
-        {{!-- const itemValue = item.value;  --}}
-        if (confirm(`Do you really want to delete the item ?`)) { 
-            try { const response = await axios.delete(`/${idValue}`); 
-            console.log(response); 
-            alert("Data Deleted Successfully!"); location.reload(); 
-        } 
-          catch (error) {
-            console.log(error.response); } } 
-        });
+    deleteBtn.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        let idValue = deleteBtn.getAttribute('id-value')
+
+        if(confirm(`Are you sure you want to delete ITEM?`)){
+        try{
+            let response = await axios.delete(`/${idValue}`)
+                console.log(response)
+                alert(`Item is deleted`)
+                location.reload();
+            }
+        
+        catch (error) {
+            console.error(error)
+        }
+        }
+    })
+
     </script>
 
   </body>

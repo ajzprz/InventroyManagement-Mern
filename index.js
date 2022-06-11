@@ -8,7 +8,7 @@ const path = require('path');
 const morgan = require('morgan');
 
 
-connectDatabase ()
+connectDatabase ();
 
 const app = express();
 app.use('/css', express.static(path.resolve(__dirname, "public/css")))
@@ -24,7 +24,7 @@ app.set('view engine','hbs');
 app.set('views','./views')
 
 app.get('/', async (req,res)=>{
-    const products = await Product.find()
+    const products = await Product.find().sort({item : -1})
     res.render('index',{products})
 })
 app.delete('/:productId', deleteProduct)

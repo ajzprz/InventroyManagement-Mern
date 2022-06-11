@@ -3,8 +3,12 @@ const Product = require("../models/Products");
 const getProducts = async (req, res) => {
   // const {productId} = req.params;
   const products = await Product.find();
-  res.json(products);
+  res.render('index', products);
 };
+
+const addProduct = (req,res)=>{
+  res.render('newProduct')
+}
 
 
 
@@ -38,14 +42,6 @@ const updateProduct = async (req, res) => {
     res.render("index", updatedProduct);
   }
 
-const getDeleteProduct = async (req, res) => {
-  const { productId } = req.params;
-  const products = await Product.findById(productId);
-  res.send(products)
-};
-
-
-
 const deleteProduct = async (req, res) => {
   const { productId } = req.params;
   const result = await Product.findByIdAndDelete(productId,{
@@ -61,8 +57,8 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   getProducts,
   createProduct,
+  addProduct,
   getSingleProduct,
-  getDeleteProduct,
   updateProduct,
   deleteProduct,
 };
