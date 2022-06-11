@@ -18,16 +18,19 @@ a{
 
 nav{
     padding:10px;
-    height: 40px;
+
     font-size: larger;
     margin-bottom:  20px;
     color: white;
     background:black;
-    justify-content: center;
+    display:flex;
+    flex-direction:row;
+    justify-content: left;
     justify-items: center;
 }
 nav a{
     color: white;
+    padding:10px;
 
 }
 
@@ -66,13 +69,29 @@ td:nth-last-child(1){
     justify-content: space-evenly;
 }
 
-td:nth-last-child(1) a:hover {
-    color: white;
+.fa-edit{
+    color: rgba(106, 99, 244, 0.623);
 }
 
-td:nth-last-child(1) {
-    color: red;
+.fa-edit:hover{
+    cursor: pointer;
+    color: rgba(106, 99, 244, 0.926);
+
+    
 }
+
+.fa-remove{
+    color: rgba(255, 0, 0, 0.623);
+}
+
+.fa-remove:hover{
+    cursor: pointer;
+    color: rgb(255, 0, 0);
+
+    
+}
+
+
 
 
 .new-product a{

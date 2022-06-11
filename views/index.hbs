@@ -1,82 +1,82 @@
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Document</title>
-    
-</head>
 
-<body>
+  </head>
 
-    <nav class = "container">
-        <a href="http://localhost:8000/"> Home </a>
+  <body>
+
+    <nav class="container">
+      <a href="http://localhost:8000/"> Home </a>
     </nav>
-    <div class="container hero ">
-    <table>
+    <div class="container hero">
+      <table>
         <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Unit Cost</th>
-            <th>Total Cost</th>
-            <th>Buttons</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit Cost</th>
+          <th>Total Cost</th>
+          <th>Buttons</th>
         </tr>
         {{#each products}}
-            <tr>
-                <td id = "item">{{item}}</td>
-                <td id = "quantity">{{quantity}}</td>
-                <td id = "unit_cost">${{unit_cost}}</td>
-                <td id = "total_cost">${{total_cost}}</td>
-                <td class = " buttons">
-                    <a href="products/edit/{{id}}"><i class="fa fa-edit" style="font-size:24px"></i></a>
-                    <a href ="products/{{id}}"><i class="fa fa-remove"  style="font-size:24px"></i></button>
-                </td>
-            </tr>
+          <tr>
+            <td id="idValue" data-id = "{{id}}">{{item}}</td>
+            <td id="quantity">{{quantity}}</td>
+            <td id="unit_cost">${{unit_cost}}</td>
+            <td id="total_cost">${{total_cost}}</td>
+            <td class="buttons">
+              <a href="products/edit/{{id}}"><i
+                  class="fa fa-edit"
+                  style="font-size:24px"
+                ></i></a>
+              <a class="delete-btn" >
+                <i class="fa fa-remove" 
+                style="font-size:24px"></i></a>
+            </td>
+          </tr>
         {{/each}}
         <tr>
-            <td class = "new-product">
-                <a href="products/createProduct">Add New Product</a>
-            </td>
+          <td class="new-product">
+            <a href="products/createProduct">Add New Product</a>
+          </td>
         </tr>
-    </table>
-</div>
-    <div class="result"></div>
-    
-    
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous"></script>
+      </table>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"></script>
     <script>
-        const result = document.querySelector(".result");
-        const btn = document.querySelector(".submit-btn");
-        const id = document.querySelector("#id");
-        const item = document.querySelector("#item")
-        const quantity = document.querySelector("#quantity")
-        const unitCost = document.querySelector("#unit_cost")
-        const totalCost = document.querySelector("#total_cost")
-        
-        btn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const itemValue = item.value;
-            const quantityValue = quantity.value;
-            const unitCostValue = unitCost.value;
-            const totalCostValue = totalCost.value;
-            try {
-                const response = await axios.delete(`/{{_id}}`)
-                console.log(response);
-                if
-                    (response.status === 200) {
-                    result.innerHTML = `<div class="alert alert-success">Product deleted successfully</div>`;
-                }
-            } catch (error) {
-                console.log(error.response)
-                result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
-            }
-        })
-    </script> -->
-</body>
+    const id = document.querySelector("#idValue")
+    const item= document.querySelector("#itemValue")
+    const deleteBtn = document.querySelector(".delete-btn");
+     // async function deleteProduct(e) { 
+    deleteBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+        const idValue = id.getAttribute('data-id'); 
+        {{!-- const itemValue = item.value;  --}}
+        if (confirm(`Do you really want to delete the item ?`)) { 
+            try { const response = await axios.delete(`/${idValue}`); 
+            console.log(response); 
+            alert("Data Deleted Successfully!"); location.reload(); 
+        } 
+          catch (error) {
+            console.log(error.response); } } 
+        });
+    </script>
+
+  </body>
 
 </html>

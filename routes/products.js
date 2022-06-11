@@ -18,7 +18,7 @@ router.get('/edit/:productId', getSingleProduct )
 
 router.patch('/edit/:productId', updateProduct)
 
-router.get('/:productId', getDeleteProduct )
-router.delete('/:productId', deleteProduct)
+router.get('delete/:productId', getDeleteProduct )
+
 
 module.exports = router;

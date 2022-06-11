@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/index.css">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
     <title>Document</title>
     
@@ -17,51 +17,50 @@
     </nav>
     
     <div class="edit_box">
-        <form>
+        <form >
             <input type="text" name="" id="id" value = "{{_id}}">
             <input type="text" name="" id="item" value ="{{item}}">
             <input type="number" name="" id="quantity" value ="{{quantity}}">
             <input type="number" name="" id="unit_cost" value ="{{unit_cost}}">
             <button type="submit" class ="submit-btn"> Update Product </button>
             <div class="result"></div>
-
         </form>
       
     </div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous"></script>
     <script>
-        const result = document.querySelector(".result");
-        const btn = document.querySelector(".submit-btn");
-        const id = document.querySelector("#id");
-        const item = document.querySelector("#item")
-        const quantity = document.querySelector("#quantity")
-        const unitCost = document.querySelector("#unit_cost")
-        
-        btn.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const itemValue = item.value;
-        const quantityValue = quantity.value;
-        const unitCostValue = unitCost.value;
+const result = document.querySelector(".result");
+const updateBtn = document.querySelector(".submit-btn");
+const id = document.querySelector("#id");
+const item = document.querySelector("#item");
+const quantity = document.querySelector("#quantity");
+const unitCost = document.querySelector("#unit_cost");
+const deletebtn = document.querySelector(".delete-btn");
 
-        try {
-          const response = await axios.patch('/products/edit/{{_id}}', {
-            item: itemValue,
-            quantity: quantityValue,
-            unit_cost: unitCostValue,
-          });
-          console.log(response);
-          if (response.status === 200) {
-            result.innerHTML = `<div class="alert alert-success">Product Updated successfully</div>`;
-          }
-        } catch (error) {
-          console.log(error.response)
-          result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
-        }
-      });
+updateBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const itemValue = item.value;
+  const quantityValue = quantity.value;
+  const unitCostValue = unitCost.value;
 
-
+  try {
+    const response = await axios.patch("/products/edit/{{_id}}", {
+      item: itemValue,
+      quantity: quantityValue,
+      unit_cost: unitCostValue,
+    });
+    console.log(response);
+    if (response.status === 200) {
+      result.innerHTML = `<div class="alert alert-success">Product Updated successfully</div>`;
+      window.location = "http://localhost:8000/";
+    }
+  } catch (error) {
+    console.log(error.response);
+    result.innerHTML = `<div class="alert alert-success">Fields cannot be empty</div>`;
+  }
+});
     </script>
     
 </body>
