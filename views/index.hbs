@@ -43,8 +43,8 @@
                 ></i></a>
             </td>
             <td>
-                <a id-value = "{{_id}}" 
-                id="delete-btn">
+              {{!-- Using inline event handler --}}
+                <a id="delete-btn" onclick="deleteItem('{{_id}}')">
                 <i class="fa fa-remove" 
                 style="font-size:24px"></i></a>
             </td>
@@ -64,12 +64,9 @@
     <script>
     const id = document.querySelector("#idValue")
     const item= document.querySelector("#itemValue")
-    const deleteBtn = document.querySelector("#delete-btn");
-     // async function deleteProduct(e) { 
-    deleteBtn.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        let idValue = deleteBtn.getAttribute('id-value')
 
+    const deleteItem = async (idValue)=>{
+        //No need of prevent default because <a> tag is not used inside form
         if(confirm(`Are you sure you want to delete ITEM?`)){
         try{
             let response = await axios.delete(`/${idValue}`)
@@ -82,7 +79,7 @@
             console.error(error)
         }
         }
-    })
+    }
 
     </script>
 
